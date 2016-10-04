@@ -46,7 +46,11 @@ abstract class AbstractPayment extends AbstractRequest
         $data['rnd'] = time();
         $data['firmaadi'] = $this->getFirmName();
         $data['islemtipi'] = $this->transactionType;
-        $data['taksit'] = $this->getInstallment();
+        
+        $data['taksit'] = null;
+        if ($installment = $this->getInstallment()) {
+            $data['taksit'] = $installment;
+        }
 
         $signature =    $data['clientid'].
                         $data['oid'].
