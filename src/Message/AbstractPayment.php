@@ -13,6 +13,7 @@ abstract class AbstractPayment extends AbstractRequest
         'halkbank' => 'https://sanalpos.halkbank.com.tr/servlet/est3Dgate',
         'anadolubank' => 'https://anadolusanalpos.est.com.tr/servlet/est3Dgate',
         'test' => 'https://entegrasyon.asseco-see.com.tr/fim/est3Dgate',
+        'cardplus' => 'https://sanalpos.card-plus.net/servlet/est3Dgate',
     ];
 
     protected $allowedCardBrands = [
