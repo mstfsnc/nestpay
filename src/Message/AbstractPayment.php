@@ -40,7 +40,7 @@ abstract class AbstractPayment extends AbstractRequest
         $data['clientid'] = $this->getClientId();
         $data['oid'] = $this->getOrderId();
         $data['amount'] = $this->getAmount();
-        $data['currency'] = $this->getCurrency();
+        $data['currency'] = $this->getCurrencyNumeric();
         $data['okUrl'] = $this->getReturnUrl();
         $data['failUrl'] = $this->getCancelUrl();
         $data['storetype'] = '3d_pay';
