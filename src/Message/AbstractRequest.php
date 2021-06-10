@@ -71,6 +71,22 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('installment', $value);
     }
 
+    public function getDeliveryName () {
+        return $this->getParameter('tismi');
+    }
+
+    public function setDeliveryName($value) {
+        return $this->setParameter('tismi', $value);
+    }
+
+    public function getBillName () {
+        return $this->getParameter('Faturafirma');
+    }
+
+    public function setBillName($value) {
+        return $this->setParameter('Faturafirma', $value);
+    }
+
     public function getEndpoint()
     {
         $gateway = $this->getBank();

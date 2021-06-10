@@ -46,6 +46,8 @@ abstract class AbstractPayment extends AbstractRequest
         $data['storetype'] = '3d_pay';
         $data['rnd'] = time();
         $data['firmaadi'] = $this->getFirmName();
+        $data['Faturafirma'] = $this->getFirmName();
+        $data['tismi'] = $this->getDeliveryName();
         $data['islemtipi'] = $this->transactionType;
         
         $data['taksit'] = null;

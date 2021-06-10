@@ -25,6 +25,7 @@ class Gateway extends AbstractGateway
             'installment' => 0,
             'testMode' => false,
             'Faturafirma' => '',
+            'tismi' => '',
         );
     }
 
@@ -82,6 +83,14 @@ class Gateway extends AbstractGateway
 
     public function setBillName ($value) {
         return $this->setParameter('Faturafirma', $value);
+    }
+
+    public function getDeliveryName() {
+        return $this->getParameter('tismi');
+    }
+
+    public function setDeliveryName ($value) {
+        return $this->setParameter('tismi', $value);
     }
 
     public function authorize(array $parameters = array())
