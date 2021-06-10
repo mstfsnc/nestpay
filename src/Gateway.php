@@ -22,8 +22,9 @@ class Gateway extends AbstractGateway
             'storeKey' => '',
             'firmName' => '',
             'transactionType' => 'Auth',
-            'installment' => 1,
+            'installment' => 0,
             'testMode' => false,
+            'Faturafirma' => '',
         );
     }
 
@@ -73,6 +74,14 @@ class Gateway extends AbstractGateway
 
     public function setFirmName ($value) {
         return $this->setParameter('firmName', $value);
+    }
+
+    public function getBillName() {
+        return $this->getParameter('Faturafirma');
+    }
+
+    public function setBillName ($value) {
+        return $this->setParameter('Faturafirma', $value);
     }
 
     public function authorize(array $parameters = array())
