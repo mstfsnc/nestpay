@@ -8,36 +8,41 @@ use Omnipay\Common\Exception\InvalidResponseException;
 
 class TransactionResponse extends AbstractResponse
 {
-
-    public function __construct(RequestInterface $request, $data) {
+    public function __construct(RequestInterface $request, $data)
+    {
         $this->request = $request;
-        try {
-            $this->data = (array) simplexml_load_string($data);
-        } catch (\Exception $ex) {
-            throw new InvalidResponseException();
+
+        $xml = simplexml_load_string((string) $data);
+        if ($xml === false) {
+            throw new InvalidResponseException('Bankadan geçersiz yanıt alındı');
         }
+
+        $this->data = (array) $xml;
     }
 
-    public function isSuccessful() {
-        if (isset($this->data["ProcReturnCode"])) {
-            return (string) $this->data["ProcReturnCode"] === '00' || $this->data["Response"] === 'Approved';
+    public function isSuccessful(): bool
+    {
+        if (isset($this->data['ProcReturnCode'])) {
+            if ((string) $this->data['ProcReturnCode'] === '00') {
+                return true;
+            }
         }
-        return false;
+
+        return isset($this->data['Response']) && $this->data['Response'] === 'Approved';
     }
 
-    public function getMessage()
+    public function getMessage(): ?string
     {
-        return $this->data['ErrMsg'];
+        return $this->data['ErrMsg'] ?? null;
     }
 
-    public function getTransactionId()
+    public function getTransactionId(): ?string
     {
-        return $this->data['TransId'];
+        return $this->data['TransId'] ?? null;
     }
 
-    public function getTransactionReference()
+    public function getTransactionReference(): ?string
     {
-        return $this->data['HostRefNum'];
+        return $this->data['HostRefNum'] ?? null;
     }
-
 }

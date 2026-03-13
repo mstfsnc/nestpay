@@ -4,96 +4,114 @@ namespace Omnipay\Nestpay\Message;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
+    protected array $endpoints = [];
 
-    protected $endpoints = [];
-
-    public function getBank () {
+    public function getBank(): ?string
+    {
         return $this->getParameter('bank');
     }
 
-    public function setBank ($value) {
+    public function setBank(string $value): self
+    {
         return $this->setParameter('bank', $value);
     }
 
-    public function getUsername () {
+    public function getUsername(): ?string
+    {
         return $this->getParameter('username');
     }
 
-    public function setUsername ($value) {
+    public function setUsername(string $value): self
+    {
         return $this->setParameter('username', $value);
     }
 
-    public function getPassword () {
+    public function getPassword(): ?string
+    {
         return $this->getParameter('password');
     }
 
-    public function setPassword ($value) {
+    public function setPassword(string $value): self
+    {
         return $this->setParameter('password', $value);
     }
-    
-    public function getClientId () {
+
+    public function getClientId(): ?string
+    {
         return $this->getParameter('clientId');
     }
 
-    public function setClientId ($value) {
+    public function setClientId(string $value): self
+    {
         return $this->setParameter('clientId', $value);
     }
 
-    public function getStoreKey () {
+    public function getStoreKey(): ?string
+    {
         return $this->getParameter('storeKey');
     }
 
-    public function setStoreKey ($value) {
+    public function setStoreKey(string $value): self
+    {
         return $this->setParameter('storeKey', $value);
     }
 
-    public function getOrderId () {
+    public function getOrderId(): ?string
+    {
         return $this->getParameter('orderId');
     }
 
-    public function setOrderId ($value) {
+    public function setOrderId(string $value): self
+    {
         return $this->setParameter('orderId', $value);
     }
 
-    public function getFirmName() {
+    public function getFirmName(): ?string
+    {
         return $this->getParameter('firmName');
     }
 
-    public function setFirmName ($value) {
+    public function setFirmName(string $value): self
+    {
         return $this->setParameter('firmName', $value);
     }
 
-    public function getInstallment () {
-        return $this->getParameter('installment');
+    public function getInstallment(): int
+    {
+        return (int) $this->getParameter('installment');
     }
 
-    public function setInstallment($value) {
+    public function setInstallment(int $value): self
+    {
         return $this->setParameter('installment', $value);
     }
 
-    public function getDeliveryName () {
-        return $this->getParameter('tismi');
+    public function getDeliveryName(): ?string
+    {
+        return $this->getParameter('deliveryName');
     }
 
-    public function setDeliveryName($value) {
-        return $this->setParameter('tismi', $value);
+    public function setDeliveryName(string $value): self
+    {
+        return $this->setParameter('deliveryName', $value);
     }
 
-    public function getBillName () {
-        return $this->getParameter('Faturafirma');
+    public function getBillName(): ?string
+    {
+        return $this->getParameter('billName');
     }
 
-    public function setBillName($value) {
-        return $this->setParameter('Faturafirma', $value);
+    public function setBillName(string $value): self
+    {
+        return $this->setParameter('billName', $value);
     }
 
-    public function getEndpoint()
+    public function getEndpoint(): string
     {
         $gateway = $this->getBank();
-        if (!array_key_exists($gateway, $this->endpoints)) {
-            throw new \Exception('Banka geçerli değil');
+        if ($gateway === null || !array_key_exists($gateway, $this->endpoints)) {
+            throw new \InvalidArgumentException('Banka geçerli değil');
         }
         return $this->endpoints[$gateway];
     }
-
 }
