@@ -19,7 +19,7 @@ class Gateway extends AbstractGateway
             'username' => '',
             'password' => '',
             'clientId' => '',
-            'orderid' => '',
+            'orderId' => '',
             'storeKey' => '',
             'firmName' => '',
             'transactionType' => 'Auth',
