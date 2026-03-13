@@ -14,13 +14,13 @@
             "email": "mstfsnc@gmail.com"
         }
     ],
+    "require": {
+        "php": "^8.0",
+        "league/omnipay": "^3"
+    },
     "autoload": {
         "psr-4": {
             "Omnipay\\Nestpay\\": "src/"
         }
-    },
-    "require": {
-        "league/omnipay": "^3",
-        "omnipay/paypal": "^3.0"
     }
 }
